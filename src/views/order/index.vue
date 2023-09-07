@@ -1,13 +1,11 @@
 <template>
-  <div class="h-full">
-    <router-view />
-  </div>
+  <div>订单管理</div>
 </template>
 
 <script setup lang="ts">
 
 </script>
 
-<style scoped>
+<style  scoped>
 
 </style>
