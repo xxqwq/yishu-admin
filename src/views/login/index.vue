@@ -28,7 +28,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import service from '@/services/axios'
-import axios from 'axios'
 
 const router = useRouter()
 
@@ -44,16 +43,8 @@ const userInfo = ref<IUser>({
 })
 
 const login = () => {
-  router.push('/home')
+  router.push('/')
   service.post('/employee/login', {
-    username: userInfo.value.username,
-    password: userInfo.value.password
-  }).then(res => {
-    console.log(res)
-  }).catch(err => {
-    console.log(err)
-  })
-  axios.post('http://1.116.150.155:11451/api/employee/login',{
     username: userInfo.value.username,
     password: userInfo.value.password
   }).then(res => {

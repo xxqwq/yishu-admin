@@ -1,12 +1,12 @@
 <template>
   <div class="w-full h-full">
-    <el-container class="w-full h-full">
+    <el-container class="h-full!">
       <el-aside width="200px">
-        <MainAside/>
+        <MainAside />
       </el-aside>
       <el-container>
-        <el-header>
-          <MainHeader/>
+        <el-header class="p-0!">
+          <MainHeader />
         </el-header>
         <el-main>
           <router-view></router-view>
@@ -22,4 +22,5 @@ import MainAside from '@/components/main/MainAside.vue'
 
 </script>
 
-<style  scoped></style>
+<style  scoped>
+</style>
