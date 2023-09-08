@@ -27,7 +27,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import service from '@/services/axios'
+import { service } from '@/services/axios'
 
 const router = useRouter()
 
@@ -43,15 +43,25 @@ const userInfo = ref<IUser>({
 })
 
 const login = () => {
+
+  const request=service()
+  // request.post('/employee/login', {
+  //   username: userInfo.value.username,
+  //   password: userInfo.value.password
+  // }).then(res => {
+  //   console.log(res)
+  // }).catch(err => {
+  //   console.log(err)
+  // })
   router.push('/')
-  service.post('/employee/login', {
-    username: userInfo.value.username,
-    password: userInfo.value.password
-  }).then(res => {
-    console.log(res)
-  }).catch(err => {
-    console.log(err)
-  })
+  // service.post('/employee/login', {
+  //   username: userInfo.value.username,
+  //   password: userInfo.value.password
+  // }).then(res => {
+  //   console.log(res)
+  // }).catch(err => {
+  //   console.log(err)
+  // })
 }
 </script>
 

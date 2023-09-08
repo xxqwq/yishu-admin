@@ -1,9 +1,7 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import type { RouteRecordRaw } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  // routes: RouteList as RouteRecordRaw[]
+  history: createWebHashHistory('/'),
   routes: [
     {
       path: '/login',
@@ -30,4 +28,14 @@ const router = createRouter({
   ]
 })
 
+router.beforeEach((to, from, next) => {
+  //前置守卫,判断是否登录
+  if (to.path === '/login') {
+    next()
+  }else{
+
+    next()
+    
+  }
+})
 export default router

@@ -19,9 +19,6 @@ export default defineStore('page', {
     pageList: [defaultPage],
     currentPage: defaultPage
   }),
-
-  getters: {
-  },
   actions: {
     addPage(page: Page) {
       const paths: string[] = []
@@ -40,7 +37,7 @@ export default defineStore('page', {
       this.setActivePage(index - 1)
     },
     setActivePage(index: number) {
-      this.currentPage = this.pageList[index]
+      this.currentPage = this.pageList[index] || defaultPage
       router.push(this.currentPage.path)
     }
   }
