@@ -1,21 +1,19 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios'
-import { ElMessage } from 'element-plus'
+import { handleAuthError, handleGeneralError, handleNetWorkError } from './handleError'
 
 const BASE_URL = 'http://1.116.150.155:11451/api'
 const TIME_OUT = 100000
 
-export const service = (config?: AxiosRequestConfig):AxiosInstance  => {
+export default (config?: AxiosRequestConfig): AxiosInstance => {
   const instance = axios.create({
     baseURL: BASE_URL,
     timeout: TIME_OUT,
-    withCredentials: true,
     ...config
   })
 
   //请求拦截器
   instance.interceptors.request.use(
     function (config: any) {
-      console.log('config:', config)
       return config
     },
     function (err: any) {
@@ -26,31 +24,55 @@ export const service = (config?: AxiosRequestConfig):AxiosInstance  => {
   //响应拦截器
   instance.interceptors.response.use(
     function (response: any) {
-      // 对相应的数据做些什么
-      console.log('response:', response)
-      const { code, data, message } = response.data
-      if (code === 200) {
-        // 200表示请求正确
-        return data
-      } else {
-        // 出错的请求
-        ElMessage.error(message)
-        return Promise.reject(message)
+      if (response.data.code !== 200) {
+        return Promise.reject(response.data.message)
       }
+      //处理错误
+      handleAuthError(response.data.code)
+      handleGeneralError(response.data.errno, response.data.errmsg)
+      return response.data
     },
     function (err: any) {
-      // 对响应错误做些什么
-      console.log('err-response', err.response)
-      console.log('err-config', err.config)
-      console.log('err-request', err.request)
       if (err.response) {
         // 服务器返回错误
-        const { message } = err.response.data
-        ElMessage.error(message || '服务器错误')
-        return Promise.reject(message)
+        handleNetWorkError(err.response.status)
+        return Promise.reject(err.response)
       }
-      return Promise.reject(err)
     }
   )
   return instance
 }
+
+
+// //请求拦截器
+// axios.interceptors.request.use(
+//   function (config: any) {
+//     return config
+//   },
+//   function (err: any) {
+//     return Promise.reject(err)
+//   }
+// )
+
+// //响应拦截器
+// axios.interceptors.response.use(
+//   function (response: any) {
+//     if (response.data.code !== 200) {
+//       return Promise.reject(response.data.message)
+//     }
+//     //处理错误
+//     handleAuthError(response.data.code)
+//     handleGeneralError(response.data.errno, response.data.errmsg)
+//     return response.data
+//   },
+//   function (err: any) {
+//     if (err.response) {
+//       // 服务器返回错误
+//       handleNetWorkError(err.response.status)
+//       return Promise.reject(err.response)
+//     }
+//   }
+// )
+
+
+

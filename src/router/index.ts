@@ -11,8 +11,14 @@ const router = createRouter({
     {
       path: '/',
       component: () => import('@/views/home/index.vue'),
+      redirect:'/dashboard',
       meta: { title: '易书后台管理系统' },
       children: [
+        {
+          path: '/dashboard',
+          name: 'dashboard',
+          component: () => import('@/views/dashboard/index.vue')
+        },
         {
           path: '/person',
           name: 'person',
@@ -32,10 +38,8 @@ router.beforeEach((to, from, next) => {
   //前置守卫,判断是否登录
   if (to.path === '/login') {
     next()
-  }else{
-
+  } else {
     next()
-    
   }
 })
 export default router

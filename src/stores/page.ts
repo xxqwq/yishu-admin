@@ -8,7 +8,7 @@ interface Page {
 }
 const defaultPage: Page = {
   name: '首页',
-  path: '/',
+  path: '/dashboard',
   index: 0
 }
 export default defineStore('page', {

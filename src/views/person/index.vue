@@ -20,8 +20,8 @@
   </div>
   <div class="mt-10">
     <el-card>
-      <el-table :data="tableData" border style="width:100%;margin: 0 auto;" @selection-change="handleSelect">
-        <el-table-column type="selection"></el-table-column>
+      <el-table :data="tableData" border style="width: 100%" table-layout="auto" @selection-change="handleSelect">
+        <el-table-column type="selection" />
         <el-table-column prop="name" label="用户名" width="180" />
         <el-table-column prop="nickname" label="昵称" width="150" />
         <el-table-column prop="avatar" label="头像" width="80">
@@ -39,7 +39,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="createTime" label="创建时间" width="210" />
-        <el-table-column prop="operation" label="操作" width="">
+        <el-table-column prop="operation" label="操作" width="auto">
           <template #default="scope">
             <div class="flex justify-center">
               <el-button type="primary" @click="handleEdit(scope.$index, scope.row, 'edit')">编辑</el-button>
@@ -134,4 +134,5 @@ const onSubmit = () => {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

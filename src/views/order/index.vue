@@ -2,7 +2,7 @@
   <div class="mt-10">
     <div>
     </div>
-    <el-table :data="tableData" border style="width:100%;margin: 0 auto;" @selection-change="handleSelect">
+    <el-table :data="tableData"  style="width:100%;margin: 0 auto;" @selection-change="handleSelect">
       <el-table-column type="selection"></el-table-column>
       <el-table-column prop="name" label="用户名" width="180" />
       <el-table-column prop="nickname" label="昵称" width="150" />

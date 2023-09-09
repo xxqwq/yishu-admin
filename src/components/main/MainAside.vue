@@ -5,10 +5,10 @@
       <h1 class="ml-10">易书</h1>
     </div>
     <div class="w-full h-full border">
-      <router-link to="/">
-        <div class="item" :class="route.path === '/' ? 'is-active' : ''" @click="addLabel({
+      <router-link to="/dashboard">
+        <div class="item" :class="route.path === '/dashboard' ? 'is-active' : ''" @click="addLabel({
           name: '首页',
-          path: '/',
+          path: '/dashboard',
           index: 0
         })">
           <el-icon :size="20">

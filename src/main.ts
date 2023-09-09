@@ -1,7 +1,8 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import axios from 'axios'
-
+//animate.css
+import 'animate.css';
 //集成unocss
 import '@unocss/reset/tailwind.css'
 import '@/assets/css/style.css'
