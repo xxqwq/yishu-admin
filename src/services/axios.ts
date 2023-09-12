@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios'
 import { handleAuthError, handleGeneralError, handleNetWorkError } from './handleError'
+import { ElMessage } from 'element-plus'
 
 const BASE_URL = 'http://1.116.150.155:11451/api'
 const TIME_OUT = 100000
@@ -24,9 +25,6 @@ export default (config?: AxiosRequestConfig): AxiosInstance => {
   //响应拦截器
   instance.interceptors.response.use(
     function (response: any) {
-      if (response.data.code !== 200) {
-        return Promise.reject(response.data.message)
-      }
       //处理错误
       handleAuthError(response.data.code)
       handleGeneralError(response.data.errno, response.data.errmsg)

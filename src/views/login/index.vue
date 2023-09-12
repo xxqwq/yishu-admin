@@ -21,7 +21,7 @@
         <img :src="imageUrl" class="w-100 h-60" @click="getImage">
       </div>
       <div class="flex justify-center mt-20">
-        <el-button type="primary" @click="loginAction">登录</el-button>
+        <el-button type="primary" @click="login">登录</el-button>
       </div>
     </el-card>
 
@@ -31,10 +31,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import axios from 'axios';
-import { login } from '@/services/apis/login'
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
+import { useLoginStore } from '@/stores';
 
-const router=useRouter()
+const router = useRouter()
+
+const { loginAction } = useLoginStore()
 interface ILogInfo {
   username: string
   password: string
@@ -62,8 +64,8 @@ const getImage = async () => {
   })
 }
 
-const loginAction = async () => {
-  login({
+const login = async () => {
+  await loginAction({
     username: logInfo.value.username,
     password: logInfo.value.password,
   })

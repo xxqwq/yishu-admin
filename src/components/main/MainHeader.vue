@@ -7,7 +7,7 @@
         {{ page.name }}
       </el-tag>
     </div>
-    <div class="mr-10">
+    <div class="mr-10 flex justify-center items-center">
       <el-dropdown>
         <el-avatar :size="50" />
         <template #dropdown>
@@ -16,6 +16,7 @@
           </el-dropdown-menu>
         </template>
       </el-dropdown>
+      <div class="ml-5">{{ store.username }}</div>
     </div>
   </div>
   <div class="divider mt-10"></div>
@@ -23,12 +24,14 @@
 
 <script setup lang="ts">
 import router from '@/router';
-import { usePageStore } from '@/stores'
+import { useLoginStore, usePageStore } from '@/stores'
 import { useRoute } from 'vue-router';
 
 
 const route = useRoute()
 const { deletePage, pageList, setActivePage } = usePageStore()
+const store = useLoginStore()
+
 
 // 删除标签
 const handleClose = (index: any) => {

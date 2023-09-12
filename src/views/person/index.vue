@@ -22,6 +22,7 @@
     <el-card>
       <el-table :data="tableData" border style="width: 100%" table-layout="auto" @selection-change="handleSelect">
         <el-table-column type="selection" />
+        <el-table-column prop="id" label="id" width="180" />
         <el-table-column prop="name" label="用户名" width="180" />
         <el-table-column prop="nickname" label="昵称" width="150" />
         <el-table-column prop="avatar" label="头像" width="80">
@@ -119,7 +120,7 @@ const userInfo = {
 const selected = ref([])
 const handleSelect = (data: any) => {
   selected.value = data.map((item: any) => item.name)
-  console.log(selected.value);
+
 }
 import { reactive } from 'vue'
 

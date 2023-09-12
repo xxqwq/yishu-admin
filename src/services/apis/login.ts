@@ -1,4 +1,3 @@
-import axios from 'axios'
 import service from '@/services/axios'
 const myRequest = service()
 enum LOG {
@@ -11,9 +10,7 @@ interface LoginParams {
 }
 
 const login = async (params: LoginParams) => {
-  console.log(params);
   return await myRequest.post(LOG.login, params)
-
 }
 
 export { login }

@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import piniaPersist from 'pinia-plugin-persist'
 import axios from 'axios'
 //animate.css
 import 'animate.css';
@@ -20,7 +21,12 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 //axios请求
 axios.defaults.baseURL = 'http://1.116.150.155:11451'
 
-app.use(createPinia())
+//pinia以及持久化插件
+const pinia=createPinia()
+pinia.use(piniaPersist)
+
+
+app.use(pinia)
 app.use(router)
 
 app.mount('#app')
