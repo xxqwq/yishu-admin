@@ -12,7 +12,7 @@
         <el-avatar :size="50" />
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item icon="close">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="close" @click="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -26,12 +26,13 @@
 import router from '@/router';
 import { useLoginStore, usePageStore } from '@/stores'
 import { useRoute } from 'vue-router';
-
+import { logOut } from '@/services/apis/login'
+import axios from 'axios';
 
 const route = useRoute()
 const { deletePage, pageList, setActivePage } = usePageStore()
 const store = useLoginStore()
-
+const { logOutAction } = store
 
 // 删除标签
 const handleClose = (index: any) => {
@@ -47,7 +48,10 @@ const handleChange = (page: any, index: number) => {
   router.push(page.path)
 }
 
-
+//退出登录
+const logout = async () => {
+  await logOutAction()
+}
 
 </script>
 

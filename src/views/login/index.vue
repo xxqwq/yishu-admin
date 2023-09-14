@@ -14,7 +14,7 @@
         <el-icon :size="20" class="mr-10">
           <Lock />
         </el-icon>
-        <el-input v-model="logInfo.password" type="password" placeholder="请输入密码" show-password />
+        <el-input v-model="logInfo.password" type="password" placeholder="请输入密码" closable show-password />
       </div>
       <div class="flex items-center justify-center">
         <el-input style="width: 200px;" v-model="logInfo.checkword" placeholder="请输入验证码" />
@@ -30,9 +30,9 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import axios from 'axios';
 import { useRouter } from 'vue-router'
 import { useLoginStore } from '@/stores';
+import myRequest from '@/services/axios'
 
 const router = useRouter()
 
@@ -53,10 +53,10 @@ const logInfo = ref<ILogInfo>({
 //验证码图片
 const imageUrl = ref('')
 const getImage = async () => {
-  axios.get('/api/email/code/image', {
+  myRequest.get('/email/code/image', {
     responseType: 'arraybuffer'
-  }).then(res => {
-    const blob = new Blob([new Uint8Array(res.data)], { type: 'image/jpeg' }); // 将流数据转换为Blob对象
+  }).then((res: any) => {
+    const blob = new Blob([new Uint8Array(res)], { type: 'image/jpeg' }); // 将流数据转换为Blob对象
     // 创建包含验证码图片的URL
     imageUrl.value = URL.createObjectURL(blob);
   }).catch(err => {

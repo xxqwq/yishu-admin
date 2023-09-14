@@ -1,14 +1,16 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios'
 import { handleAuthError, handleGeneralError, handleNetWorkError } from './handleError'
-import { ElMessage } from 'element-plus'
 
 const BASE_URL = 'http://1.116.150.155:11451/api'
 const TIME_OUT = 100000
 
-export default (config?: AxiosRequestConfig): AxiosInstance => {
+const service=(config?: AxiosRequestConfig): AxiosInstance => {
   const instance = axios.create({
     baseURL: BASE_URL,
     timeout: TIME_OUT,
+    headers: {
+      token: localStorage.getItem('token') || ''
+    },
     ...config
   })
 
@@ -40,7 +42,7 @@ export default (config?: AxiosRequestConfig): AxiosInstance => {
   )
   return instance
 }
-
+export default service()
 
 // //请求拦截器
 // axios.interceptors.request.use(
@@ -71,6 +73,3 @@ export default (config?: AxiosRequestConfig): AxiosInstance => {
 //     }
 //   }
 // )
-
-
-

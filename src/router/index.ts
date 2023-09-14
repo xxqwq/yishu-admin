@@ -11,7 +11,7 @@ const router = createRouter({
     {
       path: '/',
       component: () => import('@/views/home/index.vue'),
-      redirect:'/dashboard',
+      redirect: '/dashboard',
       meta: { title: '易书后台管理系统' },
       children: [
         {
@@ -39,7 +39,12 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/login') {
     next()
   } else {
-    next()
+    if (localStorage.getItem('token')) {
+      // 已登录
+      next()
+    }else{
+      next('/login')
+    }
   }
 })
 export default router

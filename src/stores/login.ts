@@ -1,5 +1,6 @@
-import { login } from '@/services/apis/login'
+import { logOut, login } from '@/services/apis/login'
 import { defineStore } from 'pinia'
+import router from '@/router'
 
 export default defineStore('login', {
   //定义状态
@@ -24,6 +25,12 @@ export default defineStore('login', {
       this.username = res.data.username
       localStorage.setItem('token', res.data.token)
       return res
+    },
+    //退出登录
+    async logOutAction() {
+      await logOut()
+      router.push('/login')
+      localStorage.removeItem('token')
     }
   }
 })
